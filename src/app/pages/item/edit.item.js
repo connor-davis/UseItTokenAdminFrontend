@@ -6,11 +6,11 @@ import {useSelector} from "react-redux";
 
 import {Link} from "react-router-dom";
 
-import {selectItems} from "../slices/items";
-import {selectUser} from "../slices/user";
-import "../styles/global.scss";
-import "../styles/item.scss";
-import {API_URL} from "../utils";
+import {selectItems} from "../../slices/items";
+import {selectUser} from "../../slices/user";
+import "../../styles/global.scss";
+import "../../styles/item.scss";
+import {API_URL} from "../../utils";
 
 function EditItem({match}) {
     let [name, setName] = useState("");

@@ -8,18 +8,18 @@ import {persistor} from "../store";
 import "../styles/global.scss";
 import "../styles/home.scss";
 
-import CreateItem from "./create.item";
-import EditItem from "./edit.item";
+import CreateItem from "./item/create.item";
+import EditItem from "./item/edit.item";
 import Items from "./items";
 import Users from "./users";
-import CreateCompany from "./create.company";
+import CreateCompany from "./company/create.company";
 import NotFound from "./not.found";
-import CreateAdmin from "./create.admin";
+import CreateAdmin from "./admin/create.admin";
 import Dashboard from "./dashboard";
 import {MdDashboard} from "react-icons/md";
 import UserInfo from "./user.info";
-import EditCompany from "./edit.company";
-import EditAdmin from "./edit.admin";
+import EditCompany from "./company/edit.company";
+import EditAdmin from "./admin/edit.admin";
 
 function Home() {
     function logout() {

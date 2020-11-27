@@ -6,11 +6,11 @@ import {useSelector} from "react-redux";
 
 import {Link, useParams} from "react-router-dom";
 
-import {selectUser} from "../slices/user";
-import "../styles/global.scss";
-import "../styles/item.scss";
-import {selectUsers} from "../slices/users";
-import {API_URL} from "../utils";
+import {selectUser} from "../../slices/user";
+import "../../styles/global.scss";
+import "../../styles/item.scss";
+import {selectUsers} from "../../slices/users";
+import {API_URL} from "../../utils";
 
 function EditCompany() {
     let [name, setName] = useState("");

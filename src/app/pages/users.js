@@ -73,9 +73,6 @@ function Users() {
                     {/* <td style={{ width: "10%" }}>{user.balance}</td> */}
                     <td style={{width: "15%"}}>{type(user.userType)}</td>
                     <td style={{width: "10%"}}>
-                        {/* <Link to={{
-                                pathname: "/userInfo/" + user.uid,
-                            }}><button><FaInfo /></button></Link> */}
                         <Link to={{
                             pathname: "/editAdmin/" + user.uid,
                         }}>
@@ -118,8 +115,7 @@ function Users() {
                 <tr>
                     <th style={{width: "5%"}}>#</th>
                     <th style={{width: "25%"}}>Full Name</th>
-                    <th style={{width: "35%"}}>Email</th>
-                    <th style={{width: "10%"}}>Balance</th>
+                    <th style={{width: "45%"}}>Email</th>
                     <th style={{width: "15%"}}>Type</th>
                     <th style={{width: "10%"}}/>
                 </tr>
@@ -130,12 +126,8 @@ function Users() {
                         <td style={{width: "5%"}}>{index + 1}</td>
                         <td style={{width: "25%"}}>{user.fullname}</td>
                         <td style={{width: "35%"}}>{user.email}</td>
-                        <td style={{width: "10%"}}>{user.balance}</td>
                         <td style={{width: "15%"}}>{type(user.userType)}</td>
                         <td style={{width: "10%"}}>
-                            {/* <Link to={{
-                                pathname: "/userInfo/" + user.uid,
-                            }}><button><FaInfo /></button></Link> */}
                             <Link to={{
                                 pathname: "/editCompany/" + user.uid,
                             }}>

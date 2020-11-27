@@ -6,20 +6,21 @@ import { useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 
-import { selectUser } from "../slices/user";
-import "../styles/global.scss";
-import "../styles/item.scss";
-import {API_URL} from "../utils";
+import { selectUser } from "../../slices/user";
 
-function CreateAdmin() {
+import "../../styles/global.scss";
+import "../../styles/item.scss";
+import {API_URL} from "../../utils";
+
+function CreateCompany() {
     let [name, setName] = useState("");
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
 
     let user = useSelector(selectUser);
 
-    async function createAdmin() {
-        await axios.post(API_URL + "/users/", { fullname: name, email, password, userType: "admin" }, {
+    async function createCompany() {
+        await axios.post(API_URL + "/users/", { fullname: name, email, password, userType: "company" }, {
             headers: {
                 "Authorization": "Bearer " + user.token,
                 "secure_secret": user.secure_secret,
@@ -32,7 +33,7 @@ function CreateAdmin() {
 
     return (
         <div className="modify-item">
-            <p className="title">Create Admin</p>
+            <p className="title">Create Company</p>
 
             <input
                 type="text"
@@ -56,11 +57,11 @@ function CreateAdmin() {
                 onChange={(e) => setPassword(e.target.value)} />
 
             <span>
-                <button onClick={createAdmin}>Continue</button>
+                <button onClick={createCompany}>Continue</button>
                 <Link to="/users"><button>Cancel</button></Link>
             </span>
         </div>
     );
 }
 
-export default CreateAdmin;
+export default CreateCompany;

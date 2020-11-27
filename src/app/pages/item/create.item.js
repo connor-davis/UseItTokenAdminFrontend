@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 
-import { selectUser } from "../slices/user";
-import "../styles/global.scss";
-import "../styles/item.scss";
-import {API_URL} from "../utils";
+import { selectUser } from "../../slices/user";
+import "../../styles/global.scss";
+import "../../styles/item.scss";
+import {API_URL} from "../../utils";
 
 function CreateItem() {
     let [name, setName] = useState("");
