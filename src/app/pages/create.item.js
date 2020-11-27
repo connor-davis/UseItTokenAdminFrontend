@@ -31,7 +31,7 @@ function CreateItem() {
     }
 
     return (
-        <div className="create-item">
+        <div className="modify-item">
             <p className="title">Create Product</p>
 
             <input

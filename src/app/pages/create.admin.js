@@ -31,7 +31,7 @@ function CreateAdmin() {
     }
 
     return (
-        <div className="create-item">
+        <div className="modify-item">
             <p className="title">Create Admin</p>
 
             <input

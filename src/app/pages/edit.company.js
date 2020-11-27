@@ -45,7 +45,7 @@ function EditCompany() {
     }
 
     return (
-        <div className="edit-item">
+        <div className="modify-item">
             {name ? <div>
                 <p className="title">Edit Company</p>
 

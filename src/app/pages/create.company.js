@@ -32,7 +32,7 @@ function CreateCompany() {
     }
 
     return (
-        <div className="create-item">
+        <div className="modify-item">
             <p className="title">Create Company</p>
 
             <input

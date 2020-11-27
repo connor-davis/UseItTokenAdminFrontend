@@ -67,9 +67,9 @@ function Home() {
                     <Route path="/createAdmin"><CreateAdmin/></Route>
                     <Route path="/createCompany"><CreateCompany/></Route>
                     <Route path="/createItem"><CreateItem/></Route>
-                    <Route path="/editAdmin/:id" component={(props) => <EditAdmin {...props} />}/>
-                    <Route path="/editCompany/:id" component={(props) => <EditCompany {...props} />}/>
-                    <Route path="/editItem/:id" exact component={(props) => <EditItem {...props} />}/>
+                    <Route path="/editAdmin/:id"><EditAdmin/></Route>
+                    <Route path="/editCompany/:id"><EditCompany/></Route>
+                    <Route path="/editItem/:id"><EditItem/></Route>
                     <Route component={NotFound}/>
                 </Switch>
             </div>

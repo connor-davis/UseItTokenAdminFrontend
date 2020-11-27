@@ -47,7 +47,7 @@ function EditItem({match}) {
     }
 
     return (
-        <div className="edit-item">
+        <div className="modify-item">
             {name ? <div>
                 <p className="title">Edit Product</p>
 
