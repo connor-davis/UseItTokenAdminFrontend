@@ -2,15 +2,15 @@ import React, {useEffect, useState} from "react";
 
 import axios from "axios";
 
-import {useSelector} from "react-redux";
+import {selectUser} from "../slices/user";
+import {selectUsers} from "../slices/users";
 
+import {useSelector} from "react-redux";
 import {Link, useParams} from "react-router-dom";
+import {API_URL} from "../utils";
 
 import "../styles/global.scss";
 import "../styles/item.scss";
-import {selectUser} from "../slices/user";
-import {selectUsers} from "../slices/users";
-import {API_URL} from "../utils";
 
 function EditAdmin() {
     let [name, setName] = useState("");
