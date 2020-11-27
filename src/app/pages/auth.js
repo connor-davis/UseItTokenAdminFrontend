@@ -9,6 +9,7 @@ import {Route} from "react-router";
 import {setUser} from "../slices/user";
 import "../styles/auth.scss";
 import "../styles/global.scss";
+import {API_URL} from "../utils";
 
 function Auth() {
     let dispatch = useDispatch();
@@ -16,7 +17,7 @@ function Auth() {
     let [password, setPassword] = useState("");
 
     async function authenticate() {
-        await axios.post("http://localhost/auth/login", {
+        await axios.post(API_URL + "/auth/login", {
             email, password
         }).then((response) => {
             if (response.data.success) {

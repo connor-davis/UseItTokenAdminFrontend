@@ -10,6 +10,7 @@ import {selectUser} from "../slices/user";
 import "../styles/global.scss";
 import "../styles/item.scss";
 import {selectUsers} from "../slices/users";
+import {API_URL} from "../utils";
 
 function EditCompany() {
     let [name, setName] = useState("");
@@ -32,7 +33,7 @@ function EditCompany() {
     }, [id, users]);
 
     function editUser() {
-        axios.put("http://localhost/users/" + id, {fullname: name, email, userType: "company"}, {
+        axios.put(API_URL + "/users/" + id, {fullname: name, email, userType: "company"}, {
             headers: {
                 "Authorization": "Bearer " + user.token,
                 "secure_secret": user.secure_secret,

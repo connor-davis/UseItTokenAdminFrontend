@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { selectUser } from "../slices/user";
 import "../styles/global.scss";
 import "../styles/item.scss";
+import {API_URL} from "../utils";
 
 function CreateItem() {
     let [name, setName] = useState("");
@@ -18,7 +19,7 @@ function CreateItem() {
     let user = useSelector(selectUser);
 
     async function createItem() {
-        await axios.post("http://localhost/items/", { name, price: itemValue, category }, {
+        await axios.post(API_URL + "/items/", { name, price: itemValue, category }, {
             headers: {
                 "Authorization": "Bearer " + user.token,
                 "secure_secret": user.secure_secret,

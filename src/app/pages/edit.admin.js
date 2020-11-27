@@ -10,6 +10,7 @@ import "../styles/global.scss";
 import "../styles/item.scss";
 import {selectUser} from "../slices/user";
 import {selectUsers} from "../slices/users";
+import {API_URL} from "../utils";
 
 function EditAdmin() {
     let [name, setName] = useState("");
@@ -32,7 +33,7 @@ function EditAdmin() {
     }, [id, users]);
 
     function editUser() {
-        axios.put("http://localhost/users/" + id, {fullname: name, email, userType: "admin"}, {
+        axios.put(API_URL + "/users/" + id, {fullname: name, email, userType: "admin"}, {
             headers: {
                 "Authorization": "Bearer " + user.token,
                 "secure_secret": user.secure_secret,

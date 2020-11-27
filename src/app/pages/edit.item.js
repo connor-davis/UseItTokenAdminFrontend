@@ -10,6 +10,7 @@ import {selectItems} from "../slices/items";
 import {selectUser} from "../slices/user";
 import "../styles/global.scss";
 import "../styles/item.scss";
+import {API_URL} from "../utils";
 
 function EditItem({match}) {
     let [name, setName] = useState("");
@@ -34,7 +35,7 @@ function EditItem({match}) {
     }, [id, items]);
 
     function editItem() {
-        axios.put("http://localhost/items/" + id, {name, price: itemValue, category}, {
+        axios.put(API_URL + "/items/" + id, {name, price: itemValue, category}, {
             headers: {
                 "Authorization": "Bearer " + user.token,
                 "secure_secret": user.secure_secret,

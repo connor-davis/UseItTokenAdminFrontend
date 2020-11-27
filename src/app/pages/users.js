@@ -11,13 +11,14 @@ import axios from "axios";
 
 import {selectUser} from "../slices/user";
 import {selectUsers} from "../slices/users";
+import {API_URL} from "../utils";
 
 function Users() {
     let user = useSelector(selectUser);
     let users = useSelector(selectUsers);
 
     function deleteUser(id) {
-        axios.delete("http://localhost/users/" + id, {
+        axios.delete(API_URL + "/users/" + id, {
             headers: {
                 "Authorization": "Bearer " + user.token,
                 "secure_secret": user.secure_secret

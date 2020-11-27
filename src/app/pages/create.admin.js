@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { selectUser } from "../slices/user";
 import "../styles/global.scss";
 import "../styles/item.scss";
+import {API_URL} from "../utils";
 
 function CreateAdmin() {
     let [name, setName] = useState("");
@@ -18,7 +19,7 @@ function CreateAdmin() {
     let user = useSelector(selectUser);
 
     async function createAdmin() {
-        await axios.post("http://localhost/users/", { fullname: name, email, password, userType: "admin" }, {
+        await axios.post(API_URL + "/users/", { fullname: name, email, password, userType: "admin" }, {
             headers: {
                 "Authorization": "Bearer " + user.token,
                 "secure_secret": user.secure_secret,

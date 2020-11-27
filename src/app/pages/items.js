@@ -10,13 +10,14 @@ import {MdDelete, MdEdit} from "react-icons/md";
 
 import {selectItems} from "../slices/items";
 import {selectUser} from "../slices/user";
+import {API_URL} from "../utils";
 
 function Items() {
     let user = useSelector(selectUser);
     let items = useSelector(selectItems);
 
     function deleteItem({id}) {
-        axios.delete("http://localhost/items/" + id, {
+        axios.delete(API_URL + "/items/" + id, {
             headers: {
                 "Authorization": "Bearer " + user.token,
                 "secure_secret": user.secure_secret

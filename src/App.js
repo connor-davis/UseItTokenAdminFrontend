@@ -10,6 +10,7 @@ import {selectUser} from './app/slices/user';
 import axios from "axios";
 import {setUsers} from "./app/slices/users";
 import {setItems} from "./app/slices/items";
+import {API_URL} from "./app/utils";
 
 function App() {
     let dispatch = useDispatch();
@@ -17,7 +18,7 @@ function App() {
 
     useEffect(() => {
         if (user.secure_secret) {
-            axios.get("http://localhost/users/", {
+            axios.get(API_URL + "/users/", {
                 headers: {
                     "Authorization": "Bearer " + user.token,
                     "secure_secret": user.secure_secret,
@@ -39,7 +40,7 @@ function App() {
 
             }).catch((error) => console.log(error));
 
-            axios.get("http://localhost/items/", {
+            axios.get(API_URL + "/items", {
                 headers: {
                     "Authorization": "Bearer " + user.token,
                     "secure_secret": user.secure_secret,

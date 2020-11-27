@@ -10,6 +10,7 @@ import { selectUser } from "../slices/user";
 
 import "../styles/global.scss";
 import "../styles/item.scss";
+import {API_URL} from "../utils";
 
 function CreateCompany() {
     let [name, setName] = useState("");
@@ -19,7 +20,7 @@ function CreateCompany() {
     let user = useSelector(selectUser);
 
     async function createCompany() {
-        await axios.post("http://localhost/users/", { fullname: name, email, password, userType: "company" }, {
+        await axios.post(API_URL + "/users/", { fullname: name, email, password, userType: "company" }, {
             headers: {
                 "Authorization": "Bearer " + user.token,
                 "secure_secret": user.secure_secret,
