@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from "react";
 
-import axios from "axios";
-
 import {useSelector} from "react-redux";
-
 import {Link} from "react-router-dom";
+import {API_URL, axios, fetchItems} from "../../utils";
 
 import {selectItems} from "../../slices/items";
 import {selectUser} from "../../slices/user";
+
 import "../../styles/global.scss";
 import "../../styles/item.scss";
-import {API_URL} from "../../utils";
 
-function EditItem({match}) {
+
+function EditItem({match, history}) {
     let [name, setName] = useState("");
     let [itemValue, setItemValue] = useState(0);
     let [category, setCategory] = useState("");
@@ -41,8 +40,10 @@ function EditItem({match}) {
                 "secure_secret": user.secure_secret,
             }
         }).then((response) => {
-            console.log(response);
-            if (response.data.success) window.location.href = "/items";
+            if (response.data.success) {
+                fetchItems();
+                history.push("/items");
+            }
         }).catch((error) => console.log(error));
     }
 

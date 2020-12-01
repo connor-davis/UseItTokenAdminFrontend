@@ -1,15 +1,12 @@
-import axios from "axios";
-
 import React, {useState} from "react";
-
 import {useDispatch} from "react-redux";
-
 import {Route} from "react-router";
-
+import {API_URL, axios} from "../utils";
 import {setUser} from "../slices/user";
+
 import "../styles/auth.scss";
 import "../styles/global.scss";
-import {API_URL} from "../utils";
+import {addNotification} from "../slices/notifications";
 
 function Auth() {
     let dispatch = useDispatch();
@@ -21,17 +18,25 @@ function Auth() {
             email, password
         }).then((response) => {
             if (response.data.success) {
+                if (response.data.data.userType !== "admin") {
+                    let notification = {
+                        title: "",
+                        content: "You are not authorized to log in with this application."
+                    };
+
+                    dispatch(addNotification({notification, closeAfter: 5}))
+                    return;
+                }
+
                 window.location.href = "/";
                 dispatch(setUser(response.data.data));
             }
-
-            if (response.data.error) alert(response.data.error);
         });
     }
 
     return (
         <div className="auth-page">
-            <div className="blur-background" />
+            <div className="blur-background"/>
             <div className="auth-form">
                 <Route path="/" exact>
                     <input

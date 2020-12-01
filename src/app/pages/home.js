@@ -1,10 +1,13 @@
 import React from "react";
 
 import {VscOrganization, VscPackage} from "react-icons/vsc";
-
 import {Link, Route, Switch} from "react-router-dom";
-
 import {persistor} from "../store";
+import {MdDashboard} from "react-icons/md";
+import {useSelector} from "react-redux";
+
+import {selectLoading} from "../slices/loading";
+
 import "../styles/global.scss";
 import "../styles/home.scss";
 
@@ -16,12 +19,14 @@ import CreateCompany from "./company/create.company";
 import NotFound from "./not.found";
 import CreateAdmin from "./admin/create.admin";
 import Dashboard from "./dashboard";
-import {MdDashboard} from "react-icons/md";
 import UserInfo from "./user.info";
 import EditCompany from "./company/edit.company";
 import EditAdmin from "./admin/edit.admin";
+import Loading from "./loading";
 
 function Home() {
+    let loading = useSelector(selectLoading);
+
     function logout() {
         persistor.purge().then(r => console.log(r));
         window.location.href = "/";
@@ -59,19 +64,19 @@ function Home() {
                 </div>
             </div>
             <div className="home-content">
-                <Switch>
+                {!loading ? <Switch>
                     <Route path="/" exact><Dashboard/></Route>
                     <Route path="/users"><Users/></Route>
                     <Route path="/items"><Items/></Route>
                     <Route path="/userInfo/:id"><UserInfo/></Route>
-                    <Route path="/createAdmin"><CreateAdmin/></Route>
-                    <Route path="/createCompany"><CreateCompany/></Route>
-                    <Route path="/createItem"><CreateItem/></Route>
-                    <Route path="/editAdmin/:id"><EditAdmin/></Route>
-                    <Route path="/editCompany/:id"><EditCompany/></Route>
-                    <Route path="/editItem/:id"><EditItem/></Route>
+                    <Route path="/createAdmin" component={(props) => <CreateAdmin {...props} />}/>
+                    <Route path="/createCompany" component={(props) => <CreateCompany {...props} />}/>
+                    <Route path="/createItem" component={(props) => <CreateItem {...props} />}/>
+                    <Route path="/editAdmin/:id" component={(props) => <EditAdmin {...props} />}/>
+                    <Route path="/editCompany/:id" component={(props) => <EditCompany {...props} />}/>
+                    <Route path="/editItem/:id" component={(props) => <EditItem {...props} />}/>
                     <Route component={NotFound}/>
-                </Switch>
+                </Switch> : <Loading/>}
             </div>
         </div>
     );

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../useit-token-backend/.idea/useit-token-backend.iml" filepath="$PROJECT_DIR$/../useit-token-backend/.idea/useit-token-backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/useit-token-frontend.iml" filepath="$PROJECT_DIR$/.idea/useit-token-frontend.iml" />
     </modules>
   </component>

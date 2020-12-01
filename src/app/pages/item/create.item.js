@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
-import axios from "axios";
+import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+import {API_URL, axios, fetchItems} from "../../utils";
+import {selectUser} from "../../slices/user";
 
-import { useSelector } from "react-redux";
-
-import { Link } from "react-router-dom";
-
-import { selectUser } from "../../slices/user";
 import "../../styles/global.scss";
 import "../../styles/item.scss";
-import {API_URL} from "../../utils";
 
-function CreateItem() {
+function CreateItem({ history }) {
     let [name, setName] = useState("");
     let [itemValue, setItemValue] = useState(0);
     let [category, setCategory] = useState("");
@@ -19,14 +16,16 @@ function CreateItem() {
     let user = useSelector(selectUser);
 
     async function createItem() {
-        await axios.post(API_URL + "/items/", { name, price: itemValue, category }, {
+        await axios.post(API_URL + "/items/", {name, price: itemValue, category}, {
             headers: {
                 "Authorization": "Bearer " + user.token,
                 "secure_secret": user.secure_secret,
             }
         }).then((response) => {
-            console.log(response);
-            if (response.data.success) window.location.href = "/items";
+            if (response.data.success) {
+                fetchItems();
+                history.push("/items");
+            }
         }).catch((error) => console.log(error));
     }
 
@@ -39,21 +38,23 @@ function CreateItem() {
                 name="name"
                 value={name}
                 placeholder="Name"
-                onChange={(e) => setName(e.target.value)} />
+                onChange={(e) => setName(e.target.value)}/>
 
             <input
                 type="number"
                 name="value"
                 value={itemValue}
                 placeholder="Item Value"
-                onChange={(e) => { if (e.target.value >= 0) setItemValue(e.target.value) }} />
+                onChange={(e) => {
+                    if (e.target.value >= 0) setItemValue(e.target.value)
+                }}/>
 
             <input
                 type="text"
                 name="material"
                 value={category}
                 placeholder="Material"
-                onChange={(e) => setCategory(e.target.value)} />
+                onChange={(e) => setCategory(e.target.value)}/>
 
             <span>
                 <button onClick={createItem}>Continue</button>

@@ -21,5 +21,3 @@ export {
     setUser,
     selectUser
 }
-
-export default userSlice.reducer;

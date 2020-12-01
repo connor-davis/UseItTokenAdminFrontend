@@ -1,18 +1,16 @@
 import React, {useEffect, useState} from "react";
 
-import axios from "axios";
+import {useSelector} from "react-redux";
+import {Link, useParams} from "react-router-dom";
+import {API_URL, axios, fetchUsers} from "../../utils";
 
 import {selectUser} from "../../slices/user";
 import {selectUsers} from "../../slices/users";
 
-import {useSelector} from "react-redux";
-import {Link, useParams} from "react-router-dom";
-import {API_URL} from "../../utils";
-
 import "../../styles/global.scss";
 import "../../styles/item.scss";
 
-function EditAdmin() {
+function EditAdmin({history}) {
     let [name, setName] = useState("");
     let [email, setEmail] = useState("");
 
@@ -39,8 +37,10 @@ function EditAdmin() {
                 "secure_secret": user.secure_secret,
             }
         }).then((response) => {
-            console.log(response);
-            if (response.data.success) window.location.href = "/users";
+            if (response.data.success) {
+                fetchUsers();
+                history.push("/users");
+            }
         }).catch((error) => console.log(error));
     }
 

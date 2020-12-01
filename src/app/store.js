@@ -6,10 +6,14 @@ import storage from "redux-persist/lib/storage";
 import {itemsSlice} from "./slices/items";
 import {userSlice} from "./slices/user";
 import {usersSlice} from "./slices/users";
+import {loadingSlice} from "./slices/loading";
+import {notificationsSlice} from "./slices/notifications";
 
 let userReducer = userSlice.reducer;
 let usersReducer = usersSlice.reducer;
 let itemsReducer = itemsSlice.reducer;
+let loadingReducer = loadingSlice.reducer;
+let notificationsReducer = notificationsSlice.reducer;
 
 function loggerMiddleware(store) {
     return function (next) {
@@ -26,7 +30,7 @@ const persistConfig = {
     storage,
 }
 
-const rootReducer = combineReducers({userReducer, usersReducer, itemsReducer})
+const rootReducer = combineReducers({userReducer, usersReducer, itemsReducer, loadingReducer, notificationsReducer})
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

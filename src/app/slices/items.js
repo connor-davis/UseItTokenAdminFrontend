@@ -21,5 +21,3 @@ export {
     setItems,
     selectItems
 }
-
-export default itemsSlice.reducer;

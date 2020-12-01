@@ -1,16 +1,12 @@
 import React from "react";
 
 import {useSelector} from "react-redux";
-
 import {Link} from "react-router-dom";
-
-import axios from "axios";
-
 import {MdDelete, MdEdit} from "react-icons/md";
+import {API_URL, axios, fetchItems} from "../utils";
 
 import {selectItems} from "../slices/items";
 import {selectUser} from "../slices/user";
-import {API_URL} from "../utils";
 
 function Items() {
     let user = useSelector(selectUser);
@@ -23,7 +19,7 @@ function Items() {
                 "secure_secret": user.secure_secret
             }
         }).then((result) => {
-            if (result.data.success) window.location.reload();
+            if (result.data.success) fetchItems();
         }).catch((error) => console.log(error));
     }
 

@@ -2,16 +2,13 @@ import React from "react";
 
 import {MdDelete, MdEdit,} from "react-icons/md";
 import {FaBuilding, FaCrown, FaUser} from "react-icons/fa";
-
 import {useSelector} from "react-redux";
-
 import {Link} from "react-router-dom";
-
-import axios from "axios";
+import {API_URL, axios, fetchUsers} from "../utils";
 
 import {selectUser} from "../slices/user";
 import {selectUsers} from "../slices/users";
-import {API_URL} from "../utils";
+
 
 function Users() {
     let user = useSelector(selectUser);
@@ -24,7 +21,7 @@ function Users() {
                 "secure_secret": user.secure_secret
             }
         }).then((result) => {
-            if (result.data.success) window.location.reload();
+            if (result.data.success) fetchUsers();
         }).catch((error) => console.log(error));
     }
 
