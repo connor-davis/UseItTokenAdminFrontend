@@ -2,7 +2,7 @@ import React from "react";
 
 import {useDispatch, useSelector} from "react-redux";
 
-import {removeNotification, selectNotifications} from "../../slices/notifications";
+import {removeNotification, selectNotifications} from "../../slices/notifications.slice";
 
 import "../../styles/global.scss";
 import "../../styles/notifications.scss";

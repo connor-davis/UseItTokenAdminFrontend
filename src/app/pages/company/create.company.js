@@ -2,9 +2,9 @@ import React, {useState} from "react";
 
 import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {API_URL, axios, fetchUsers} from "../../utils";
+import {API_URL, axios, fetchAdmins, fetchCompanies} from "../../utils";
 
-import {selectUser} from "../../slices/user";
+import {selectUser} from "../../slices/user.slice.js";
 
 import "../../styles/global.scss";
 import "../../styles/item.scss";
@@ -24,8 +24,8 @@ function CreateCompany() {
             }
         }).then((response) => {
             if (response.data.success) {
-                fetchUsers();
-                history.push("/users");
+                fetchCompanies();
+                history.goBack();
             }
         }).catch((error) => console.log(error));
     }
@@ -57,7 +57,7 @@ function CreateCompany() {
 
             <span>
                 <button onClick={createCompany}>Continue</button>
-                <Link to="/users"><button>Cancel</button></Link>
+                <Link to="/companies"><button>Cancel</button></Link>
             </span>
         </div>
     );

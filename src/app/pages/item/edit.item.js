@@ -4,8 +4,8 @@ import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {API_URL, axios, fetchItems} from "../../utils";
 
-import {selectItems} from "../../slices/items";
-import {selectUser} from "../../slices/user";
+import {selectItems} from "../../slices/items.slice";
+import {selectUser} from "../../slices/user.slice.js";
 
 import "../../styles/global.scss";
 import "../../styles/item.scss";

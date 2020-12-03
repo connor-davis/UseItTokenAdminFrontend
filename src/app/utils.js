@@ -2,26 +2,28 @@ import axios from 'axios';
 
 import {store} from "./store";
 
-import {setUsers} from "./slices/users";
-import {setItems} from "./slices/items";
-import {setUser} from "./slices/user";
-import {setLoading} from "./slices/loading";
-import {addNotification} from "./slices/notifications";
+import {setItems} from "./slices/items.slice";
+import {setUser} from "./slices/user.slice.js";
+import {setLoading} from "./slices/loading.slice";
+import {addNotification} from "./slices/notifications.slice";
+import {setAdmins} from "./slices/admins.slice";
+import {setCompanies} from "./slices/company.slice";
+import {setCollectors} from "./slices/collector.slice";
 
 let dispatch = store.dispatch;
 
-function fetchUsers() {
+function fetchAdmins() {
     let {user} = store.getState().userReducer;
 
-    axios.get(API_URL + "/users/", {
+    axios.get(API_URL + "/admin/", {
         headers: {
             "Authorization": "Bearer " + user.token,
             "secure_secret": user.secure_secret,
         }
     }).then((result) => {
+        console.log(result);
         if (result) {
-            if (result.data.error === "no-users-exist") dispatch(setUsers([]));
-            else {
+            if (result.data.success) {
                 let sorted = result.data.data.sort((a, b) => {
                     if (a.name > b.name) return 1;
                     if (a.name < b.name) return -1;
@@ -31,8 +33,60 @@ function fetchUsers() {
 
                 let filtered = sorted.filter((filter) => filter.uid !== user.uid);
 
-                dispatch(setUsers(filtered));
-            }
+                dispatch(setAdmins(filtered));
+            } else dispatch(setAdmins([]));
+        }
+    }).catch((error) => console.log(error));
+}
+
+function fetchCompanies() {
+    let {user} = store.getState().userReducer;
+
+    axios.get(API_URL + "/company/", {
+        headers: {
+            "Authorization": "Bearer " + user.token,
+            "secure_secret": user.secure_secret,
+        }
+    }).then((result) => {
+        if (result) {
+            if (result.data.success) {
+                let sorted = result.data.data.sort((a, b) => {
+                    if (a.name > b.name) return 1;
+                    if (a.name < b.name) return -1;
+
+                    return 0;
+                });
+
+                let filtered = sorted.filter((filter) => filter.uid !== user.uid);
+
+                dispatch(setCompanies(filtered));
+            } else dispatch(setCompanies([]));
+        }
+    }).catch((error) => console.log(error));
+}
+
+function fetchCollectors() {
+    let {user} = store.getState().userReducer;
+
+    axios.get(API_URL + "/collector/", {
+        headers: {
+            "Authorization": "Bearer " + user.token,
+            "secure_secret": user.secure_secret,
+        }
+    }).then((result) => {
+        if (result) {
+            if (result.data.success) {
+                let sorted = result.data.data.sort((a, b) => {
+                    if (a.name > b.name) return 1;
+                    if (a.name < b.name) return -1;
+
+                    return 0;
+                });
+
+                let filtered = sorted.filter((filter) => filter.uid !== user.uid);
+
+                dispatch(setCollectors(filtered));
+            } else dispatch(setCollectors([]));
         }
     }).catch((error) => console.log(error));
 }
@@ -46,14 +100,14 @@ function fetchItems() {
             "secure_secret": user.secure_secret,
         }
     }).then((result) => {
-        if (result.data.error === "no-items-exist") dispatch(setItems([]));
-        else
-            dispatch(setItems(result.data.data.sort((a, b) => {
-                if (a.name > b.name) return 1;
-                if (a.name < b.name) return -1;
+        if (result.data.success) dispatch(setItems(result.data.data.sort((a, b) => {
+            if (a.name > b.name) return 1;
+            if (a.name < b.name) return -1;
 
-                return 0;
-            })))
+            return 0;
+        })))
+        else dispatch(setItems([]));
+
     }).catch((error) => console.log(error));
 }
 
@@ -94,17 +148,23 @@ axios.interceptors.response.use(function (response) {
 
     if (error.response.data === "Unauthorized") {
         dispatch(setUser({}));
-        dispatch(setUsers([]));
+        dispatch(setAdmins([]));
+        dispatch(setCompanies([]));
+        dispatch(setCollectors([]));
         dispatch(setItems([]));
     }
     return Promise.reject(error);
 });
 
-const API_URL = "https://utapi.connordavis.work";
+// const API_URL = "https://utapi.connordavis.work";
+
+const API_URL = "http://localhost";
 
 export {
     axios,
     API_URL,
-    fetchUsers,
-    fetchItems
+    fetchAdmins,
+    fetchCompanies,
+    fetchCollectors,
+    fetchItems,
 };

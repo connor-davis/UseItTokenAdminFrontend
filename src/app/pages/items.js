@@ -5,8 +5,8 @@ import {Link} from "react-router-dom";
 import {MdDelete, MdEdit} from "react-icons/md";
 import {API_URL, axios, fetchItems} from "../utils";
 
-import {selectItems} from "../slices/items";
-import {selectUser} from "../slices/user";
+import {selectItems} from "../slices/items.slice";
+import {selectUser} from "../slices/user.slice.js";
 
 function Items() {
     let user = useSelector(selectUser);

@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 
 import {useParams} from "react-router";
 
-import {selectUsers} from "../slices/users";
+import {selectUsers} from "../slices/users.slice";
 import "../styles/global.scss";
 import "../styles/user.info.scss";
 

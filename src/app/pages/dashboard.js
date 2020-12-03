@@ -2,16 +2,20 @@ import React, {useEffect, useState} from "react";
 
 import {useSelector} from "react-redux";
 
-import {selectItems} from "../slices/items";
-import {selectUser} from "../slices/user";
-import {selectUsers} from "../slices/users";
+import {selectItems} from "../slices/items.slice";
+import {selectUser} from "../slices/user.slice.js";
 import "../styles/dashboard.scss";
 import "../styles/global.scss";
+import {selectAdmins} from "../slices/admins.slice";
+import {selectCompanies} from "../slices/company.slice";
+import {selectCollectors} from "../slices/collector.slice";
 
 function Dashboard() {
     let user = useSelector(selectUser);
     let items = useSelector(selectItems);
-    let users = useSelector(selectUsers);
+    let admins = useSelector(selectAdmins);
+    let companies = useSelector(selectCompanies);
+    let collectors = useSelector(selectCollectors);
 
     let [countAdmins, setCountAdmins] = useState(0);
     let [countCompanies, setCountCompanies] = useState(0);
@@ -19,17 +23,12 @@ function Dashboard() {
     let [countItems, setCountItems] = useState(0);
 
     useEffect(() => {
-        let admins = users.filter((user) => user.userType === "admin");
         setCountAdmins(admins.length);
-
-        let companies = users.filter((user) => user.userType === "company");
         setCountCompanies(companies.length);
-
-        let collectors = users.filter((user) => user.userType === "collector");
         setCountCollectors(collectors.length);
 
         setCountItems(items.length);
-    }, [user, users, items]);
+    }, [user, admins, companies, collectors, items]);
 
     return (
         <div className="dashboard-page">

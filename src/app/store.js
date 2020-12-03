@@ -3,14 +3,18 @@ import {combineReducers, configureStore, getDefaultMiddleware} from "@reduxjs/to
 import {persistReducer, persistStore} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import {itemsSlice} from "./slices/items";
-import {userSlice} from "./slices/user";
-import {usersSlice} from "./slices/users";
-import {loadingSlice} from "./slices/loading";
-import {notificationsSlice} from "./slices/notifications";
+import {itemsSlice} from "./slices/items.slice";
+import {userSlice} from "./slices/user.slice.js";
+import {loadingSlice} from "./slices/loading.slice";
+import {notificationsSlice} from "./slices/notifications.slice";
+import {adminsSlice} from "./slices/admins.slice";
+import {companiesSlice} from "./slices/company.slice";
+import {collectorsSlice} from "./slices/collector.slice";
 
 let userReducer = userSlice.reducer;
-let usersReducer = usersSlice.reducer;
+let adminsReducer = adminsSlice.reducer;
+let companiesReducer = companiesSlice.reducer;
+let collectorsReducer = collectorsSlice.reducer;
 let itemsReducer = itemsSlice.reducer;
 let loadingReducer = loadingSlice.reducer;
 let notificationsReducer = notificationsSlice.reducer;
@@ -30,7 +34,15 @@ const persistConfig = {
     storage,
 }
 
-const rootReducer = combineReducers({userReducer, usersReducer, itemsReducer, loadingReducer, notificationsReducer})
+const rootReducer = combineReducers({
+    userReducer,
+    adminsReducer,
+    companiesReducer,
+    collectorsReducer,
+    itemsReducer,
+    loadingReducer,
+    notificationsReducer
+})
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
