@@ -5,8 +5,8 @@ import {BrowserRouter as Router} from 'react-router-dom';
 
 import {fetchAdmins, fetchCollectors, fetchCompanies, fetchItems} from "./app/utils";
 
-import Auth from './app/pages/auth';
-import Home from './app/pages/home';
+import AuthPage from './app/pages/auth.page';
+import HomePage from './app/pages/home.page';
 
 import {selectUser} from './app/slices/user.slice.js';
 import Notification from "./app/pages/components/notification";
@@ -28,8 +28,8 @@ function App() {
             <Notification/>
             {
                 user.uid ?
-                    <Home/> :
-                    <Auth/>
+                    <HomePage/> :
+                    <AuthPage/>
             }
         </Router>
     );

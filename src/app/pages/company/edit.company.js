@@ -9,29 +9,32 @@ import {selectUser} from "../../slices/user.slice.js";
 import "../../styles/global.scss";
 import "../../styles/item.scss";
 import {selectCompanies} from "../../slices/company.slice";
+import LoadingPage from "../loading.page";
 
 function EditCompany({history}) {
     let [name, setName] = useState("");
     let [email, setEmail] = useState("");
+    let [phoneNumber, setPhoneNumber] = useState("");
 
     let user = useSelector(selectUser);
     let companies = useSelector(selectCompanies);
 
-    let {id} = useParams();
+    let {uid} = useParams();
 
     useEffect(() => {
-        if (id) {
+        if (uid) {
             let company = companies.filter((user) => {
-                return id === user["uid"];
+                return uid === user["uid"];
             })[0];
 
-            setName(company.fullname);
+            setName(company.name);
             setEmail(company.email);
+            setPhoneNumber(company.phoneNumber);
         }
-    }, [id, companies]);
+    }, [uid, companies]);
 
     function editCompany() {
-        axios.put(API_URL + "/users/" + id, {fullname: name, email, userType: "company"}, {
+        axios.put(API_URL + "/company/" + uid, {name, email, phoneNumber}, {
             headers: {
                 "Authorization": "Bearer " + user.token,
                 "secure_secret": user.secure_secret,
@@ -44,32 +47,35 @@ function EditCompany({history}) {
         }).catch((error) => console.log(error));
     }
 
-    return (
-        <div className="modify-item">
-            {name ? <div>
-                <p className="title">Edit Company</p>
+    return name ? <div className="modify-item">
+        <p className="title">Edit Company</p>
 
-                <input
-                    type="text"
-                    name="name"
-                    value={name}
-                    placeholder="Name"
-                    onChange={(e) => setName(e.target.value)}/>
+        <input
+            type="text"
+            name="name"
+            value={name}
+            placeholder="Name"
+            onChange={(e) => setName(e.target.value)}/>
 
-                <input
-                    type="text"
-                    name="email"
-                    value={email}
-                    placeholder="Email"
-                    onChange={(e) => setEmail(e.target.value)}/>
+        <input
+            type="text"
+            name="email"
+            value={email}
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}/>
 
-                <span>
-                    <button onClick={editCompany}>Continue</button>
+        <input
+            type="tel"
+            name="phoneNumber"
+            value={phoneNumber}
+            placeholder="Phone Number"
+            onChange={(e) => setPhoneNumber(e.target.value)}/>
+
+        <span>
+                    <button onClick={editCompany.bind(this)}>Continue</button>
                     <Link to="/companies"><button>Cancel</button></Link>
                 </span>
-            </div> : "Loading..."}
-        </div>
-    );
+    </div> : <LoadingPage/>;
 }
 
 export default EditCompany;

@@ -8,19 +8,20 @@ import {useSelector} from "react-redux";
 
 import {selectLoading} from "../slices/loading.slice";
 
-import "../styles/global.scss";
-import "../styles/home.scss";
 import AdminsPage from "./admins.page";
 import CreateCompany from "./company/create.company";
-import NotFound from "./not.found";
+import NotFoundPage from "./not.found.page";
 import CreateAdmin from "./admin/create.admin";
 import Dashboard from "./dashboard";
 import EditCompany from "./company/edit.company";
 import EditAdmin from "./admin/edit.admin";
-import Loading from "./loading";
+import LoadingPage from "./loading.page";
 import CompaniesPage from "./companies.page";
 
-function Home() {
+import "../styles/global.scss";
+import "../styles/home.scss";
+
+function HomePage() {
     let loading = useSelector(selectLoading);
 
     function logout() {
@@ -66,13 +67,13 @@ function Home() {
                     <Route path="/companies" component={(props) => <CompaniesPage {...props} />}/>
                     <Route path="/createAdmin" component={(props) => <CreateAdmin {...props} />}/>
                     <Route path="/createCompany" component={(props) => <CreateCompany {...props} />}/>
-                    <Route path="/editAdmin/:id" component={(props) => <EditAdmin {...props} />}/>
-                    <Route path="/editCompany/:id" component={(props) => <EditCompany {...props} />}/>
-                    <Route component={NotFound}/>
-                </Switch> : <Loading/>}
+                    <Route path="/editAdmin/:uid" component={(props) => <EditAdmin {...props} />}/>
+                    <Route path="/editCompany/:uid" component={(props) => <EditCompany {...props} />}/>
+                    <Route component={NotFoundPage}/>
+                </Switch> : <LoadingPage/>}
             </div>
         </div>
     );
 }
 
-export default Home;
+export default HomePage;

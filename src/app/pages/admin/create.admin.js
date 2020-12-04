@@ -24,7 +24,7 @@ function CreateAdmin({history}) {
         }).then((response) => {
             if (response.data.success) {
                 fetchAdmins();
-                history.push("/users");
+                history.goBack();
             }
         }).catch((error) => console.log(error));
     }
@@ -55,7 +55,7 @@ function CreateAdmin({history}) {
                 onChange={(e) => setPassword(e.target.value)}/>
 
             <span>
-                <button onClick={createAdmin}>Continue</button>
+                <button onClick={createAdmin.bind(this)}>Continue</button>
                 <Link to="/admins"><button>Cancel</button></Link>
             </span>
         </div>

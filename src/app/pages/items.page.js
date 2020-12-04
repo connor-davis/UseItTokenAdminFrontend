@@ -8,7 +8,7 @@ import {API_URL, axios, fetchItems} from "../utils";
 import {selectItems} from "../slices/items.slice";
 import {selectUser} from "../slices/user.slice.js";
 
-function Items() {
+function ItemsPage() {
     let user = useSelector(selectUser);
     let items = useSelector(selectItems);
 
@@ -97,4 +97,4 @@ function Items() {
     );
 }
 
-export default Items;
+export default ItemsPage;

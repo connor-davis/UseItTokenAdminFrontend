@@ -9,29 +9,30 @@ import {selectUser} from "../../slices/user.slice.js";
 import "../../styles/global.scss";
 import "../../styles/item.scss";
 import {selectAdmins} from "../../slices/admins.slice";
+import LoadingPage from "../loading.page";
 
 function EditAdmin({history}) {
     let [name, setName] = useState("");
     let [email, setEmail] = useState("");
 
     let user = useSelector(selectUser);
-    let admins = useSelector(selectAdmins());
+    let admins = useSelector(selectAdmins);
 
-    let {id} = useParams();
+    let {uid} = useParams();
 
     useEffect(() => {
-        if (id) {
+        if (uid) {
             let admin = admins.filter((user) => {
-                return id === user["uid"];
+                return uid === user["uid"];
             })[0];
 
-            setName(admin.fullname);
+            setName(admin.name);
             setEmail(admin.email);
         }
-    }, [id, admins]);
+    }, [uid, admins]);
 
     function editAdmin() {
-        axios.put(API_URL + "/users/" + id, {fullname: name, email, userType: "admin"}, {
+        axios.put(API_URL + "/admin/" + uid, {name, email}, {
             headers: {
                 "Authorization": "Bearer " + user.token,
                 "secure_secret": user.secure_secret,
@@ -39,37 +40,33 @@ function EditAdmin({history}) {
         }).then((response) => {
             if (response.data.success) {
                 fetchAdmins();
-                history.push("/users");
+                history.goBack();
             }
         }).catch((error) => console.log(error));
     }
 
-    return (
-        <div className="modify-item">
-            {name ? <div>
-                <p className="title">Edit Admin</p>
+    return name ? <div className="modify-item">
+        <p className="title">Edit Admin</p>
 
-                <input
-                    type="text"
-                    name="name"
-                    value={name}
-                    placeholder="Name"
-                    onChange={(e) => setName(e.target.value)}/>
+        <input
+            type="text"
+            name="name"
+            value={name}
+            placeholder="Name"
+            onChange={(e) => setName(e.target.value)}/>
 
-                <input
-                    type="text"
-                    name="email"
-                    value={email}
-                    placeholder="Email"
-                    onChange={(e) => setEmail(e.target.value)}/>
+        <input
+            type="text"
+            name="email"
+            value={email}
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}/>
 
-                <span>
-                    <button onClick={editAdmin}>Continue</button>
+        <span>
+                    <button onClick={editAdmin.bind(this)}>Continue</button>
                     <Link to="/admins"><button>Cancel</button></Link>
                 </span>
-            </div> : "Loading..."}
-        </div>
-    );
+    </div> : <LoadingPage/>;
 }
 
 export default EditAdmin;

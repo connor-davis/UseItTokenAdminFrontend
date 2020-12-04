@@ -3,7 +3,7 @@ import React from "react";
 import "../styles/global.scss";
 import "../styles/loading.scss";
 
-function Loading() {
+function LoadingPage() {
     return (
         <div className="loading-page">
             <svg>
@@ -26,4 +26,4 @@ function Loading() {
     );
 }
 
-export default Loading;
+export default LoadingPage;

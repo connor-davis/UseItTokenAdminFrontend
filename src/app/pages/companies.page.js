@@ -14,7 +14,7 @@ function CompaniesPage() {
     let companies = useSelector(selectCompanies);
 
     function deleteCompany(uid) {
-        axios.delete(API_URL + "/companie/" + uid, {
+        axios.delete(API_URL + "/company/" + uid, {
             headers: {
                 "Authorization": "Bearer " + user.token,
                 "secure_secret": user.secure_secret

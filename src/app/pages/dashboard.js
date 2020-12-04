@@ -4,11 +4,12 @@ import {useSelector} from "react-redux";
 
 import {selectItems} from "../slices/items.slice";
 import {selectUser} from "../slices/user.slice.js";
-import "../styles/dashboard.scss";
-import "../styles/global.scss";
 import {selectAdmins} from "../slices/admins.slice";
 import {selectCompanies} from "../slices/company.slice";
 import {selectCollectors} from "../slices/collector.slice";
+
+import "../styles/dashboard.scss";
+import "../styles/global.scss";
 
 function Dashboard() {
     let user = useSelector(selectUser);
@@ -26,7 +27,6 @@ function Dashboard() {
         setCountAdmins(admins.length);
         setCountCompanies(companies.length);
         setCountCollectors(collectors.length);
-
         setCountItems(items.length);
     }, [user, admins, companies, collectors, items]);
 

@@ -6,9 +6,8 @@ import {setUser} from "../slices/user.slice.js";
 
 import "../styles/auth.scss";
 import "../styles/global.scss";
-import {addNotification} from "../slices/notifications.slice";
 
-function Auth({ history }) {
+function AuthPage() {
     let dispatch = useDispatch();
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
@@ -18,16 +17,6 @@ function Auth({ history }) {
             email, password
         }).then((response) => {
             if (response.data.success) {
-                if (response.data.data.role.name !== "admin") {
-                    let notification = {
-                        title: "",
-                        content: "You are not authorized to log in with this application."
-                    };
-
-                    dispatch(addNotification({notification, closeAfter: 5}))
-                    return;
-                }
-
                 dispatch(setUser(response.data.data));
             }
         });
@@ -59,4 +48,4 @@ function Auth({ history }) {
     );
 }
 
-export default Auth;
+export default AuthPage;

@@ -2,32 +2,36 @@ import React, {useState} from "react";
 
 import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {API_URL, axios, fetchAdmins, fetchCompanies} from "../../utils";
+import {API_URL, axios, fetchCompanies} from "../../utils";
 
 import {selectUser} from "../../slices/user.slice.js";
 
 import "../../styles/global.scss";
 import "../../styles/item.scss";
 
-function CreateCompany() {
+function CreateCompany({history}) {
     let [name, setName] = useState("");
     let [email, setEmail] = useState("");
+    let [phoneNumber, setPhoneNumber] = useState("");
     let [password, setPassword] = useState("");
 
     let user = useSelector(selectUser);
 
-    async function createCompany({history}) {
-        await axios.post(API_URL + "/users/", {fullname: name, email, password, userType: "company"}, {
-            headers: {
-                "Authorization": "Bearer " + user.token,
-                "secure_secret": user.secure_secret,
-            }
-        }).then((response) => {
-            if (response.data.success) {
-                fetchCompanies();
-                history.goBack();
-            }
-        }).catch((error) => console.log(error));
+    async function createCompany() {
+        if (name !== "" && email !== "" && phoneNumber !== "" && password !== "") {
+            await axios.post(API_URL + "/company/create", {name, email, phoneNumber, password}, {
+                headers: {
+                    "Authorization": "Bearer " + user.token,
+                    "secure_secret": user.secure_secret,
+                }
+            }).then((response) => {
+                console.log(response);
+                if (response.data.success) {
+                    fetchCompanies();
+                    history.goBack();
+                }
+            }).catch((error) => console.log(error));
+        }
     }
 
     return (
@@ -49,6 +53,13 @@ function CreateCompany() {
                 onChange={(e) => setEmail(e.target.value)}/>
 
             <input
+                type="tel"
+                name="phoneNumber"
+                value={phoneNumber}
+                placeholder="Phone Number"
+                onChange={(e) => setPhoneNumber(e.target.value)}/>
+
+            <input
                 type="text"
                 name="password"
                 value={password}
@@ -56,7 +67,7 @@ function CreateCompany() {
                 onChange={(e) => setPassword(e.target.value)}/>
 
             <span>
-                <button onClick={createCompany}>Continue</button>
+                <button onClick={createCompany.bind(this)}>Continue</button>
                 <Link to="/companies"><button>Cancel</button></Link>
             </span>
         </div>

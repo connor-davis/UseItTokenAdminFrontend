@@ -79,7 +79,7 @@ function EditItem({match, history}) {
                     <button onClick={editItem}>Continue</button>
                     <Link to="/items"><button>Cancel</button></Link>
                 </span>
-            </div> : "Loading..."}
+            </div> : "LoadingPage..."}
         </div>
     );
 }

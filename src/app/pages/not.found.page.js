@@ -3,7 +3,7 @@ import React from "react";
 import "../styles/global.scss";
 import "../styles/not.found.scss";
 
-function NotFound({history}) {
+function NotFoundPage({history}) {
     return (
         <div className="not-found-page">
             <div className="not-found-card">
@@ -15,4 +15,4 @@ function NotFound({history}) {
     );
 }
 
-export default NotFound;
+export default NotFoundPage;

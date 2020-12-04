@@ -23,7 +23,7 @@ function fetchAdmins() {
     }).then((result) => {
         console.log(result);
         if (result) {
-            if (result.data.success) {
+            if (result.data.success === "admins-found") {
                 let sorted = result.data.data.sort((a, b) => {
                     if (a.name > b.name) return 1;
                     if (a.name < b.name) return -1;
@@ -36,7 +36,7 @@ function fetchAdmins() {
                 dispatch(setAdmins(filtered));
             } else dispatch(setAdmins([]));
         }
-    }).catch((error) => console.log(error));
+    });
 }
 
 function fetchCompanies() {
@@ -62,7 +62,7 @@ function fetchCompanies() {
                 dispatch(setCompanies(filtered));
             } else dispatch(setCompanies([]));
         }
-    }).catch((error) => console.log(error));
+    });
 }
 
 function fetchCollectors() {
@@ -88,7 +88,7 @@ function fetchCollectors() {
                 dispatch(setCollectors(filtered));
             } else dispatch(setCollectors([]));
         }
-    }).catch((error) => console.log(error));
+    });
 }
 
 function fetchItems() {
@@ -108,7 +108,7 @@ function fetchItems() {
         })))
         else dispatch(setItems([]));
 
-    }).catch((error) => console.log(error));
+    });
 }
 
 axios.interceptors.request.use(function (config) {
@@ -137,6 +137,14 @@ axios.interceptors.response.use(function (response) {
 
                 dispatch(addNotification({notification: password_mismatch, closeAfter: 5}))
                 break;
+            case "unauthorized":
+                let unauthorized = {
+                    title: "",
+                    content: "You are not allowed to do that."
+                }
+
+                dispatch(addNotification({notification: unauthorized, closeAfter: 5}))
+                break;
             default:
                 break;
         }
@@ -144,8 +152,6 @@ axios.interceptors.response.use(function (response) {
     dispatch(setLoading(false))
     return response;
 }, function (error) {
-    console.log(error.response);
-
     if (error.response.data === "Unauthorized") {
         dispatch(setUser({}));
         dispatch(setAdmins([]));
@@ -153,12 +159,14 @@ axios.interceptors.response.use(function (response) {
         dispatch(setCollectors([]));
         dispatch(setItems([]));
     }
+
+    window.location.href = "/";
+
     return Promise.reject(error);
 });
 
-// const API_URL = "https://utapi.connordavis.work";
-
-const API_URL = "http://localhost";
+const API_URL = "https://utapi.connordavis.work";
+// const API_URL = "http://localhost";
 
 export {
     axios,
