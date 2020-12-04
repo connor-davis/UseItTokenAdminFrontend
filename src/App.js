@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 
 import {useSelector} from 'react-redux';
-import {BrowserRouter as Router} from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 
 import {fetchAdmins, fetchCollectors, fetchCompanies, fetchItems} from "./app/utils";
 
@@ -24,14 +24,14 @@ function App() {
     }, [user.role]);
 
     return (
-        <Router>
+        <HashRouter>
             <Notification/>
             {
                 user.uid ?
                     <HomePage/> :
                     <AuthPage/>
             }
-        </Router>
+        </HashRouter>
     );
 }
 
