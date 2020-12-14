@@ -1,15 +1,25 @@
 {
-  "name": "useit-token-companies-frontend-electron",
+  "name": "useit-token-admin-frontend-electron",
   "version": "0.0.1",
-  "description": "This is the electron application for the Use-IT Token Companies Frontend application",
-  "main": "src/app.js",
+  "description": "This is the electron application for the Use-IT Token Admin Frontend application",
+  "main": "app.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder build --win --publish never",
+    "deploy": "electron-builder build --win --publish always"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/connor-davis/UseItTokenAdminFrontend.git"
   },
   "author": "Connor Davis",
   "license": "MIT",
   "dependencies": {
+    "electron-is-dev": "^1.2.0",
+    "electron-updater": "^4.3.5"
+  },
+  "devDependencies": {
     "electron": "^11.0.3",
-    "electron-is-dev": "^1.2.0"
+    "electron-builder": "^22.9.1"
   }
 }

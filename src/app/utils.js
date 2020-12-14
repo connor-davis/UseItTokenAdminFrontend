@@ -2,13 +2,13 @@ import axios from 'axios';
 
 import {store} from "./store";
 
+import {setAdmins} from "./slices/admins.slice";
+import {setCollectors} from "./slices/collector.slice";
+import {setCompanies} from "./slices/company.slice";
 import {setItems} from "./slices/items.slice";
-import {setUser} from "./slices/user.slice.js";
 import {setLoading} from "./slices/loading.slice";
 import {addNotification} from "./slices/notifications.slice";
-import {setAdmins} from "./slices/admins.slice";
-import {setCompanies} from "./slices/company.slice";
-import {setCollectors} from "./slices/collector.slice";
+import {setUser} from "./slices/user.slice.js";
 
 let dispatch = store.dispatch;
 
@@ -152,12 +152,14 @@ axios.interceptors.response.use(function (response) {
     dispatch(setLoading(false))
     return response;
 }, function (error) {
-    if (error.response.data === "Unauthorized") {
-        dispatch(setUser({}));
-        dispatch(setAdmins([]));
-        dispatch(setCompanies([]));
-        dispatch(setCollectors([]));
-        dispatch(setItems([]));
+    if (error.response) {
+        if (error.response.data === "Unauthorized") {
+            dispatch(setUser({}));
+            dispatch(setAdmins([]));
+            dispatch(setCompanies([]));
+            dispatch(setCollectors([]));
+            dispatch(setItems([]));
+        }
     }
 
     window.location.href = "/";

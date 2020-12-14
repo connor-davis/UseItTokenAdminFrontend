@@ -1,32 +1,35 @@
 import React from "react";
 
 import {VscOrganization} from "react-icons/vsc";
+
 import {Link, Route, Switch} from "react-router-dom";
-import {persistor} from "../store";
+
 import {MdDashboard} from "react-icons/md";
+
 import {useSelector} from "react-redux";
 
+import {persistor} from "../store";
 import {selectLoading} from "../slices/loading.slice";
-
-import AdminsPage from "./admins.page";
-import CreateCompany from "./company/create.company";
-import NotFoundPage from "./not.found.page";
-import CreateAdmin from "./admin/create.admin";
-import Dashboard from "./dashboard";
-import EditCompany from "./company/edit.company";
-import EditAdmin from "./admin/edit.admin";
-import LoadingPage from "./loading.page";
-import CompaniesPage from "./companies.page";
-
 import "../styles/global.scss";
 import "../styles/home.scss";
+
+import AdminsPage from "./admins.page";
+import CompaniesPage from "./companies.page";
+import Dashboard from "./dashboard";
+import LoadingPage from "./loading.page";
+import NotFoundPage from "./not.found.page";
+
+import CreateAdmin from "./admin/create.admin";
+import EditAdmin from "./admin/edit.admin";
+import CreateCompany from "./company/create.company";
+import EditCompany from "./company/edit.company";
 
 function HomePage() {
     let loading = useSelector(selectLoading);
 
     function logout() {
         persistor.purge().then(r => console.log(r));
-        window.location.href = "/";
+        window.location.reload();
     }
 
     return (
@@ -57,7 +60,7 @@ function HomePage() {
                     </ul>
                 </div>
                 <div className="sidebar-footer">
-                    <button onClick={logout} className="block">Logout</button>
+                    <button onClick={logout.bind(this)} className="block">Logout</button>
                 </div>
             </div>
             <div className="home-content">
