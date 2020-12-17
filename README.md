@@ -30,7 +30,5 @@
 
   <img src="https://img.shields.io/github/languages/top/connor-davis/UseItTokenAdminFrontend?color=gold&logo=github&logoColor=gold&style=for-the-badge" alt="top-language" />
   <img src="https://img.shields.io/github/repo-size/connor-davis/UseItTokenAdminFrontend?color=gold&logo=github&logoColor=gold&style=for-the-badge" alt="repo-size" />
-  <img src="https://img.shields.io/github/downloads/connor-davis/UseItTokenAdminFrontend/desktop/total?color=gold&logo=github&logoColor=gold&style=for-the-badge" alt="desktop-downloads" />
-  <img src="https://img.shields.io/github/downloads/connor-davis/UseItTokenAdminFrontend/mobile/total?color=gold&logo=github&logoColor=gold&style=for-the-badge" alt="mobile-downloads" />
 
 </div>
