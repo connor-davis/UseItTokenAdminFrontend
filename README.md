@@ -1,4 +1,4 @@
-<div>
+<div style="text-align: center">
 
   ### Use-IT Token Admin Frontend 
   #### Welcome to the repo for the Use-IT Token Admin Panel!
